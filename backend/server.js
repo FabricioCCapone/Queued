@@ -12,7 +12,7 @@ app.use(cors());
 
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI)
-    .then(ç)
+    .then()
     .catch((error) => {
         console.error('Error connecting to MongoDB:', error);
         process.exit(1);
@@ -20,6 +20,18 @@ mongoose.connect(process.env.MONGO_URI)
 
 app.get('/', (req, res) => {
     res.send('Hello from MERN stack!');
+});
+
+app.post('/api/movies', async (req, res) => {
+    const { title, director, year } = req.body;
+    const Movie = mongoose.model('Movie', { title: String, director: String, year: Number });
+    const movie = new Movie({ title, director, year });
+    try {
+        const savedMovie = await movie.save();
+        res.json(savedMovie);
+    } catch (error) {
+        res.json({ message: error });
+    }
 });
 
 app.listen(PORT, () => {
