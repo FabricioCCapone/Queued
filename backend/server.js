@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
     res.send('Hello from MERN stack!');
 });
 
-app.post('/api/movies', async (req, res) => {
+app.post('/', async (req, res) => {
     const { title, director, year } = req.body;
     const Movie = mongoose.model('Movie', { title: String, director: String, year: Number });
     const movie = new Movie({ title, director, year });

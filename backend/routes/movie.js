@@ -1,7 +1,7 @@
 //Routes for movies
 const express = require('express');
 const router = express.Router();
-const Movie = require('../models/Movie');
+const Movie = require('../models/movieModel');
 
 // Get all movies
 router.get('/', async (req, res) => {
@@ -25,17 +25,12 @@ router.get('/:movieId', async (req, res) => {
 
 // Add a movie
 router.post('/', async (req, res) => {
-  const movie = new Movie({
-    title: req.body.title,
-    director: req.body.director,
-    year: req.body.year
-  });
-
+  const { title, director, year } = req.body;
   try {
-    const savedMovie = await movie.save();
-    res.json(savedMovie);
+    const movie = await Movie.create({ title, director, year });
+    res.status(200).json(movie);
   } catch (error) {
-    res.json({ message: error });
+    res.status(400).json({ message: error });
   }
 });
 
