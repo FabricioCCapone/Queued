@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const Movie = require('../models/movieModel');
+const { getMovies, getMovieById, createMovie, updateMovie, deleteMovie } = require('../controllers/movieControllers');
 
 // Get all movies
 router.get('/', async (req, res) => {

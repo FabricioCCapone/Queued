@@ -17,6 +17,10 @@ const movieSchema = new Schema({
     year: {
         type: Number,
         required: true
+    },
+    rating: {
+        type: Number,
+        required: false
     }
 },
     {
