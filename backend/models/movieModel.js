@@ -1,7 +1,6 @@
 //Movie model file
 const mongoose = require('mongoose');
 
-C
 const Schema = mongoose.Schema;
 
 // Movie schema with id, title, director, and year fields

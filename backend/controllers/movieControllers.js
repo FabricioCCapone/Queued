@@ -1,7 +1,8 @@
 // Movie Controller 
 // Methods: getMovies, getMovieById, createMovie, updateMovie, deleteMovie
 
-const Movie = require('../models/Movie');
+const Movie = require('../models/movieModel');
+const mongoose = require('mongoose');
 
 // @desc    Get all movies
 // @route   GET /api/movies
@@ -20,7 +21,11 @@ const getMovies = async (req, res) => {
 // @access  Public
 const getMovieById = async (req, res) => {
     try {
-        const movie = await Movie.findById(req.params.id);
+        const { movieId } = req.params;
+        if (!mongoose.Types.ObjectId.isValid(movieId)) {
+            return res.status(404).json({ message: 'Invalid movie ID' });
+        }
+        const movie = await Movie.findById(movieId);
         if (movie) {
             res.json(movie);
         } else {
@@ -55,19 +60,18 @@ const createMovie = async (req, res) => {
 // @access  Public
 const updateMovie = async (req, res) => {
     try {
-        const movie = await Movie.findById(req.params.id);
-
-        if (movie) {
-            movie.title = req.body.title || movie.title;
-            movie.director = req.body.director || movie.director;
-            movie.year = req.body.year || movie.year;
-            movie.rating = req.body.rating || movie.rating;
-
-            const updatedMovie = await movie.save();
-            res.json(updatedMovie);
-        } else {
-            res.status(404).json({ message: 'Movie not found' });
+        const { movieId } = req.params;
+        if (!mongoose.Types.ObjectId.isValid(movieId)) {
+            return res.status(404).json({ message: 'Invalid movie ID' });
         }
+        const movie = await Movie.findOneAndUpdate({ _id: movieId }, { ...req.body });
+
+        if (!movie) {
+            res.status(404).json({ message: 'Movie not found' });
+        } else {
+            res.status(200).json(movie);
+        }
+
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -78,11 +82,13 @@ const updateMovie = async (req, res) => {
 // @access  Public
 const deleteMovie = async (req, res) => {
     try {
-        const movie = await Movie.findById(req.params.id);
-
+        const { movieId } = req.params;
+        if (!mongoose.Types.ObjectId.isValid(movieId)) {
+            return res.status(404).json({ message: 'Invalid movie ID' });
+        }
+        const movie = await Movie.findOneAndDelete({ _id: movieId });
         if (movie) {
-            await movie.remove();
-            res.json({ message: 'Movie removed' });
+            res.status(200).json({ message: 'Movie removed' });
         } else {
             res.status(404).json({ message: 'Movie not found' });
         }

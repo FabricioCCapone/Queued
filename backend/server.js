@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config();
+const routes = require('./routes/movie');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -18,21 +19,15 @@ mongoose.connect(process.env.MONGO_URI)
         process.exit(1);
     });
 
-app.get('/', (req, res) => {
-    res.send('Hello from MERN stack!');
-});
+// Middleware
+app.use((req, res, next) => {
+    console.log(req.method, req.path);
+    next();
+})
 
-app.post('/', async (req, res) => {
-    const { title, director, year } = req.body;
-    const Movie = mongoose.model('Movie', { title: String, director: String, year: Number });
-    const movie = new Movie({ title, director, year });
-    try {
-        const savedMovie = await movie.save();
-        res.json(savedMovie);
-    } catch (error) {
-        res.json({ message: error });
-    }
-});
+// Routes
+
+app.use(routes);
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}.`);
