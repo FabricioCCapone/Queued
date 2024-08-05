@@ -5,18 +5,18 @@ const Movie = require('../models/movieModel');
 const { getMovies, getMovieById, createMovie, updateMovie, deleteMovie } = require('../controllers/movieControllers');
 
 // Get all movies
-router.get('/', getMovies);
+router.get('/api/movies', getMovies);
 
 // Get a specific movie
-router.get('/:movieId', getMovieById);
+router.get('/api/:movieId', getMovieById);
 
 // Add a movie
-router.post('/', createMovie);
+router.post('/api/addMovie', createMovie);
 
 // Update a movie
-router.patch('/:movieId', updateMovie);
+router.patch('/api/:movieId', updateMovie);
 
 // Delete a movie
-router.delete('/:movieId', deleteMovie);
+router.delete('/api/:movieId', deleteMovie);
 
 module.exports = router;
