@@ -31,14 +31,13 @@ header a{
 }
 
 .pages {
-  width: 1400px;
+  width: 80%;
   padding: 20px;
   margin: 0 auto;
 }
 
 /* homepage */
 .home {
-  display: grid;
   grid-template-columns: 3fr 1fr;
   gap: 100px;
 }
@@ -49,7 +48,14 @@ header a{
   padding: 20px;
   position: relative;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  display: flex;
 }
+
+.movie-details div {
+  margin-left: 20px;
+  width: 70%;
+}
+
 .movie-details h3 {
   margin: 0 0 10px 0;
   font-size: 1.2em;
