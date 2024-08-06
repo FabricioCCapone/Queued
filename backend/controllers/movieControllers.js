@@ -44,14 +44,17 @@ const createMovie = async (req, res) => {
         title: req.body.title,
         director: req.body.director,
         year: req.body.year,
-        rating: req.body.rating
+        rating: req.body.rating,
+        review: req.body.review,
+        genres: req.body.genres,
+        duration: req.body.duration,
+        imageUrl: req.body.imageUrl
     });
-
     try {
         const newMovie = await movie.save();
         res.status(201).json(newMovie);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ message: error.message });   
     }
 }
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 //Components
 import MovieDetails from '../components/MovieDetails';
+import MovieForm from '../components/MovieForm';
 
 const Home = () => {
 
@@ -27,6 +28,7 @@ const Home = () => {
                     </div>
                 ))}
             </div>
+            <MovieForm/>
         </div>
     );
 }
