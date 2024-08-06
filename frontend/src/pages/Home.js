@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 
+//Components
+import MovieDetails from '../components/MovieDetails';
+
 const Home = () => {
 
     const [movies, setMovies] = useState(null);
     useEffect(() => {
         const fetchMovies = async () => {
-            const response = await fetch('http://localhost:4000/api/movies');
+            const response = await fetch('/api/movies');
             const data = await response.json();
             if (response.ok) {
                 setMovies(data);
@@ -18,11 +21,9 @@ const Home = () => {
         <div className="home">
             <h2>List of Movies Watched</h2>
             <div className="movies">
-                {movies && movies.map(movie => (
-                    <div className="movie" key={movie.id}>
-                        <h2>{movie.title}</h2>
-                        <p>Rating: {movie.rating}</p>
-                        <p>Genre: {movie.genre}</p>
+                {movies && movies.map((movie, index) => (
+                    <div className="movie" key={movie.id || index}>
+                        <MovieDetails key={movie._id}  movie={movie} />
                     </div>
                 ))}
             </div>
