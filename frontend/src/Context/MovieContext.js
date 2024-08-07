@@ -17,7 +17,7 @@ export const moviesreducer = (state, action) => {
         case 'DELETE_MOVIE':
             return {
                 ...state,
-                movies: state.movies.filter(movie => movie._id !== action.payload)
+                movies: state.movies.filter((w) => w._id !== action.payload._id)
             };
         default:
             return state;
@@ -26,7 +26,7 @@ export const moviesreducer = (state, action) => {
 
 export const MoviesContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(moviesreducer, {
-        movies: null
+        movies: []
     });
     return (
         <MoviesContext.Provider value = {{...state, dispatch}}>
