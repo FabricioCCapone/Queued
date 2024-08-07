@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useMoviesContext } from "../hooks/useMoviesContext";
 
 const MovieForm = () => {
+    const { dispatch } = useMoviesContext();
     const [title, setTitle] = useState('');
     const [director, setDirector] = useState('');
     const [year, setYear] = useState('');
@@ -36,7 +38,6 @@ const MovieForm = () => {
         }
         if(response.ok){
             setError(null);
-            console.log('Movie added successfully');
             setTitle('');
             setDirector('');
             setYear('');
@@ -45,6 +46,8 @@ const MovieForm = () => {
             setReview('');
             setRating('');
             setUrl('');
+            console.log('Movie added successfully');
+            dispatch({ type: 'ADD_MOVIE', payload: json });
         }
     };
     
