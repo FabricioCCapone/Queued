@@ -67,7 +67,7 @@ const movieSchema = new Schema({
         type: Number,
         required: false
     },
-    imageUrl: {
+    posterUrl: {
         type: String,
         required: true // or false if it's optional
       }

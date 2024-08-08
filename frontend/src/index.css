@@ -77,6 +77,11 @@ header a{
   color: #333;
 }
 
+.movie-details img {
+  width: 100%;
+  border-radius: 4px;
+}
+
 /* form */
 input {
   padding: 10px;
@@ -103,4 +108,7 @@ div.error {
   color: var(--error);
   border-radius: 4px;
   margin: 20px 0;
+}
+input.error {
+  border: 1px solid var(--error);
 }

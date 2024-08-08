@@ -48,8 +48,19 @@ const createMovie = async (req, res) => {
         review: req.body.review,
         genres: req.body.genres,
         duration: req.body.duration,
-        imageUrl: req.body.imageUrl
+        posterUrl: req.body.imageUrl
     });
+
+    let emptyFields = [];
+    for (let key in movie) {
+        if (!movie[key]) {
+            emptyFields.push(key);
+        }
+    }
+    if (emptyFields.length > 0) {
+        return res.status(400).json({ message: `Missing fields: ${emptyFields.join(', ')}` });
+    }
+
     try {
         const newMovie = await movie.save();
         res.status(201).json(newMovie);
