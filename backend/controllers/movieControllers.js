@@ -40,26 +40,20 @@ const getMovieById = async (req, res) => {
 // @route   POST /api/movies
 // @access  Public
 const createMovie = async (req, res) => {
-    const movie = new Movie({
-        title: req.body.title,
-        director: req.body.director,
-        year: req.body.year,
-        rating: req.body.rating,
-        review: req.body.review,
-        genres: req.body.genres,
-        duration: req.body.duration,
-        posterUrl: req.body.posterUrl
-    });
+    const { title, director, year, genres, duration, review, rating, posterUrl } = req.body;
+
+    console.log(req.body);
 
     let emptyFields = [];
-    if (!movie.title) emptyFields.push('Title');
-    if (!movie.director) emptyFields.push('Director');
-    if (!movie.year) emptyFields.push('Year');
-    if (!movie.rating) emptyFields.push('Rating');
-    if (!movie.review) emptyFields.push('Review');
-    if (!movie.genres) emptyFields.push('Genres');
-    if (!movie.duration) emptyFields.push('Duration');
-    if (!movie.posterUrl) emptyFields.push('Poster URL');
+
+    if (!title) emptyFields.push('title');
+    if (!director) emptyFields.push('director');
+    if (!year) emptyFields.push('year');
+    if (!rating) emptyFields.push('rating');
+    if (!review) emptyFields.push('review');
+    if (genres.length > 0) emptyFields.push('genres');
+    if (!duration) emptyFields.push('duration');
+    if (!posterUrl) emptyFields.push('posterUrl');
 
     if (emptyFields.length > 0) {
         return res.status(400).json({error : 'Missing fields:',  emptyFields});

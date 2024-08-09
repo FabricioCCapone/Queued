@@ -33,14 +33,14 @@ const MovieForm = () => {
             },
             body: JSON.stringify(movie)
         });
+
         const json = await response.json();
+
         if (!response.ok) {
-            setError(json.message);
+            setError(json.error);
             setEmptyFields(json.emptyFields);
         }
         if (response.ok) {
-            setError(null);
-            setEmptyFields([]);
             setTitle('');
             setDirector('');
             setYear('');
@@ -49,6 +49,8 @@ const MovieForm = () => {
             setReview('');
             setRating('');
             setUrl('');
+            setError(null);
+            setEmptyFields([]);
             console.log('Movie added successfully');
             dispatch({ type: 'ADD_MOVIE', payload: json });
         }
@@ -64,7 +66,7 @@ const MovieForm = () => {
                     placeholder="Title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    className={emptyFields.includes('Title') ? 'error' : ''}
+                    className={emptyFields.includes('title') ? 'error' : ''}
                 />
             </label>
             <label>Director:
@@ -74,7 +76,7 @@ const MovieForm = () => {
                     placeholder="Director"
                     value={director}
                     onChange={(e) => setDirector(e.target.value)}
-                    className={emptyFields.includes('Director') ? 'error' : ''}
+                    className={emptyFields.includes('director') ? 'error' : ''}
                 />
             </label>
             <label>Year:
@@ -84,7 +86,7 @@ const MovieForm = () => {
                     placeholder="Year"
                     value={year}
                     onChange={(e) => setYear(e.target.value)}
-                    className={emptyFields.includes('Year') ? 'error' : ''}
+                    className={emptyFields.includes('year') ? 'error' : ''}
                 />
             </label>
             <label>Genres:
@@ -94,7 +96,7 @@ const MovieForm = () => {
                     placeholder="Genres"
                     value={genres}
                     onChange={(e) => setGenres(e.target.value)}
-                    className={emptyFields.includes('Genres') ? 'error' : ''}
+                    className={emptyFields.includes('genres') ? 'error' : ''}
                 />
             </label>
             <label>Duration:
@@ -106,7 +108,7 @@ const MovieForm = () => {
                     min={1}
                     max={500}
                     onChange={(e) => setDuration(e.target.value)}
-                    className={emptyFields.includes('Duration') ? 'error' : ''}
+                    className={emptyFields.includes('duration') ? 'error' : ''}
                 />
             </label>
             <label>Review:
@@ -117,7 +119,7 @@ const MovieForm = () => {
                     value={review}
                     maxLength={500}
                     onChange={(e) => setReview(e.target.value)}
-                    className={emptyFields.includes('Review') ? 'error' : ''}
+                    className={emptyFields.includes('review') ? 'error' : ''}
                 />
             </label>
             <label>Rating:
@@ -129,7 +131,7 @@ const MovieForm = () => {
                     min={1}
                     max={10}
                     onChange={(e) => setRating(e.target.value)}
-                    className={emptyFields.includes('Rating') ? 'error' : ''}
+                    className={emptyFields.includes('rating') ? 'error' : ''}
                 />
             </label>
             <label>Poster URL:
@@ -139,7 +141,7 @@ const MovieForm = () => {
                     placeholder="Poster URL"
                     value={posterUrl}
                     onChange={(e) => setUrl(e.target.value)}
-                    className={emptyFields.includes('PosterUrl') ? 'error' : ''}
+                    className={emptyFields.includes('posterUrl') ? 'error' : ''}
                 />
             </label>
             <br />

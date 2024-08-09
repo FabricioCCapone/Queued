@@ -46,12 +46,6 @@ const movieSchema = new Schema({
         type: [String],
         enum: allowedGenres,
         required: true,
-        validate: {
-            validator: function (arr) {
-                return arr.length > 0; // Ensure there's at least one genre
-            },
-            message: 'At least one genre is required.'
-        }
     },
     duration: {
         type: Number,
