@@ -36,7 +36,7 @@ const MovieForm = () => {
         const json = await response.json();
         if (!response.ok) {
             setError(json.message);
-            setEmptyFields(json.emptyFields || []);
+            setEmptyFields(json.emptyFields);
         }
         if (response.ok) {
             setError(null);
@@ -64,7 +64,7 @@ const MovieForm = () => {
                     placeholder="Title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    className={emptyFields.includes('title') ? 'error' : ''}
+                    className={emptyFields.includes('Title') ? 'error' : ''}
                 />
             </label>
             <label>Director:
@@ -74,7 +74,7 @@ const MovieForm = () => {
                     placeholder="Director"
                     value={director}
                     onChange={(e) => setDirector(e.target.value)}
-                    className={emptyFields.includes('director') ? 'error' : ''}
+                    className={emptyFields.includes('Director') ? 'error' : ''}
                 />
             </label>
             <label>Year:
@@ -84,7 +84,7 @@ const MovieForm = () => {
                     placeholder="Year"
                     value={year}
                     onChange={(e) => setYear(e.target.value)}
-                    className={emptyFields.includes('year') ? 'error' : ''}
+                    className={emptyFields.includes('Year') ? 'error' : ''}
                 />
             </label>
             <label>Genres:
@@ -94,7 +94,7 @@ const MovieForm = () => {
                     placeholder="Genres"
                     value={genres}
                     onChange={(e) => setGenres(e.target.value)}
-                    className={emptyFields.includes('genres') ? 'error' : ''}
+                    className={emptyFields.includes('Genres') ? 'error' : ''}
                 />
             </label>
             <label>Duration:
@@ -106,7 +106,7 @@ const MovieForm = () => {
                     min={1}
                     max={500}
                     onChange={(e) => setDuration(e.target.value)}
-                    className={emptyFields.includes('duration') ? 'error' : ''}
+                    className={emptyFields.includes('Duration') ? 'error' : ''}
                 />
             </label>
             <label>Review:
@@ -117,7 +117,7 @@ const MovieForm = () => {
                     value={review}
                     maxLength={500}
                     onChange={(e) => setReview(e.target.value)}
-                    className={emptyFields.includes('review') ? 'error' : ''}
+                    className={emptyFields.includes('Review') ? 'error' : ''}
                 />
             </label>
             <label>Rating:
@@ -129,7 +129,7 @@ const MovieForm = () => {
                     min={1}
                     max={10}
                     onChange={(e) => setRating(e.target.value)}
-                    className={emptyFields.includes('rating') ? 'error' : ''}
+                    className={emptyFields.includes('Rating') ? 'error' : ''}
                 />
             </label>
             <label>Poster URL:
@@ -139,7 +139,7 @@ const MovieForm = () => {
                     placeholder="Poster URL"
                     value={posterUrl}
                     onChange={(e) => setUrl(e.target.value)}
-                    className={emptyFields.includes('posterUrl') ? 'error' : ''}
+                    className={emptyFields.includes('PosterUrl') ? 'error' : ''}
                 />
             </label>
             <br />

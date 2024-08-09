@@ -48,17 +48,21 @@ const createMovie = async (req, res) => {
         review: req.body.review,
         genres: req.body.genres,
         duration: req.body.duration,
-        posterUrl: req.body.imageUrl
+        posterUrl: req.body.posterUrl
     });
 
     let emptyFields = [];
-    for (let key in movie) {
-        if (!movie[key]) {
-            emptyFields.push(key);
-        }
-    }
+    if (!movie.title) emptyFields.push('Title');
+    if (!movie.director) emptyFields.push('Director');
+    if (!movie.year) emptyFields.push('Year');
+    if (!movie.rating) emptyFields.push('Rating');
+    if (!movie.review) emptyFields.push('Review');
+    if (!movie.genres) emptyFields.push('Genres');
+    if (!movie.duration) emptyFields.push('Duration');
+    if (!movie.posterUrl) emptyFields.push('Poster URL');
+
     if (emptyFields.length > 0) {
-        return res.status(400).json({ message: `Missing fields: ${emptyFields.join(', ')}` });
+        return res.status(400).json({error : 'Missing fields:',  emptyFields});
     }
 
     try {
