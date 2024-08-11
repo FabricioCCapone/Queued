@@ -36,9 +36,10 @@ const MovieForm = () => {
 
         const json = await response.json();
 
+
         if (!response.ok) {
-            setError(json.error);
             setEmptyFields(json.emptyFields);
+            setError(json.error);
         }
         if (response.ok) {
             setTitle('');
@@ -146,7 +147,7 @@ const MovieForm = () => {
             </label>
             <br />
             <button type="submit">Add Movie</button>
-            {error && <div className="error">{error}</div>}
+            {error && <div className="error">{emptyFields.join()}</div>}
         </form>
     );
 }

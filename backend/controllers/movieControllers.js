@@ -42,8 +42,6 @@ const getMovieById = async (req, res) => {
 const createMovie = async (req, res) => {
     const { title, director, year, genres, duration, review, rating, posterUrl } = req.body;
 
-    console.log(req.body);
-
     let emptyFields = [];
 
     if (!title) emptyFields.push('title');
@@ -56,6 +54,7 @@ const createMovie = async (req, res) => {
     if (!posterUrl) emptyFields.push('posterUrl');
 
     if (emptyFields.length > 0) {
+        console.log(emptyFields);
         return res.status(400).json({error : 'Missing fields:',  emptyFields});
     }
 
