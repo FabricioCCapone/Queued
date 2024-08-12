@@ -11,8 +11,8 @@ const MovieForm = () => {
     const [review, setReview] = useState('');
     const [rating, setRating] = useState('');
     const [posterUrl, setUrl] = useState('');
-    const [error, setError] = useState(null);
     const [emptyFields, setEmptyFields] = useState([]);
+    const [error, setError] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -26,6 +26,8 @@ const MovieForm = () => {
             rating,
             posterUrl
         };
+        // Log the movie object to inspect the payload
+        console.log('Movie payload:', movie);
         const response = await fetch('/api/addMovie', {
             method: 'POST',
             headers: {
@@ -36,12 +38,13 @@ const MovieForm = () => {
 
         const json = await response.json();
 
-
         if (!response.ok) {
-            setEmptyFields(json.emptyFields);
+            setEmptyFields(json.emptyFields || []);
             setError(json.error);
         }
         if (response.ok) {
+            setError(null);
+            setEmptyFields([]);
             setTitle('');
             setDirector('');
             setYear('');
@@ -50,8 +53,6 @@ const MovieForm = () => {
             setReview('');
             setRating('');
             setUrl('');
-            setError(null);
-            setEmptyFields([]);
             console.log('Movie added successfully');
             dispatch({ type: 'ADD_MOVIE', payload: json });
         }
@@ -147,7 +148,11 @@ const MovieForm = () => {
             </label>
             <br />
             <button type="submit">Add Movie</button>
-            {error && <div className="error">{emptyFields.join()}</div>}
+            {error && (
+                <div className="error">
+                    {emptyFields.map(field => field.charAt(0).toUpperCase() + field.slice(1)).join(', ')}
+                </div>
+            )}
         </form>
     );
 }

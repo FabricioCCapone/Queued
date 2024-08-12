@@ -37,7 +37,7 @@ const getMovieById = async (req, res) => {
 }
 
 // @desc    Create a movie
-// @route   POST /api/movies
+// @route   POST /api/addMovies
 // @access  Public
 const createMovie = async (req, res) => {
     const { title, director, year, genres, duration, review, rating, posterUrl } = req.body;
@@ -49,14 +49,15 @@ const createMovie = async (req, res) => {
     if (!year) emptyFields.push('year');
     if (!rating) emptyFields.push('rating');
     if (!review) emptyFields.push('review');
-    if (genres.length > 0) emptyFields.push('genres');
+    if (genres.length === 0 || genres[0] === "" ) emptyFields.push('genres');
     if (!duration) emptyFields.push('duration');
     if (!posterUrl) emptyFields.push('posterUrl');
 
-    if (emptyFields.length > 0) {
-        console.log(emptyFields);
+    if (emptyFields.length > 0 && emptyFields[0] !== "") {
         return res.status(400).json({error : 'Missing fields:',  emptyFields});
     }
+
+    const movie = new Movie({ title, director, year, genres, duration, review, rating, posterUrl });
 
     try {
         const newMovie = await movie.save();

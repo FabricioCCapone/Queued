@@ -1,5 +1,8 @@
 import { useMoviesContext } from "../hooks/useMoviesContext";
 
+//Date fns
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+
 const MovieDetails = ({ movie }) => {
 
     const { dispatch } = useMoviesContext();
@@ -27,9 +30,10 @@ const MovieDetails = ({ movie }) => {
                 <p><strong>Genre: </strong>{movie.genre}</p>
                 <p><strong>Duration: </strong>{movie.duration} minutes</p>
                 <p><strong>My Review: </strong>{movie.review}</p>
+                <p>{formatDistanceToNow(new Date(movie.createdAt), {addSuffix: true})}</p>
             </div>
             <div>
-                <span onClick={handleClick}>Delete</span>
+                <span className="material-symbols-outlined" onClick={handleClick}>Delete</span>
             </div>
 
         </div>
