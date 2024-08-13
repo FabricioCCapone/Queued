@@ -1,9 +1,10 @@
 /* Google font */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
 
 /* Layout */
 :root {
-  --color-primary: #1aac83;
+  --color-primary: #52369d;
   --error: #dc3545;
 }
 
@@ -17,7 +18,7 @@ header {
   background: #fff;
 }
 header .container {
-  width: 1400px;
+  width: 90%;
   margin: 0 auto;
   padding: 10px 20px;
   display: flex;
@@ -52,7 +53,7 @@ header a{
 }
 
 .movie-details div {
-  margin-left: 20px;
+  margin-left: 10%;
   width: 70%;
 }
 
@@ -62,8 +63,8 @@ header a{
   color: var(--color-primary);
 }
 .movie-details p {
-  margin: 0;
-  font-size: 0.9em;
+  margin: 5%;
+  font-size: 1em;
   color: #555;
 }
 .movie-details span {
@@ -78,7 +79,6 @@ header a{
 }
 
 .movie-details img {
-  width: 100%;
   border-radius: 4px;
 }
 

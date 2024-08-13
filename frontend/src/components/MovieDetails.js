@@ -20,7 +20,9 @@ const MovieDetails = ({ movie }) => {
     return (
         <div className="movie-details">
             <img src={movie.posterUrl} alt={movie.title} width="156px" height="231px" />
-            <h3>{movie.title}</h3>
+            <div>
+                <h3>{movie.title}</h3>
+            </div>
             <div>
                 <p><strong>Director: </strong>{movie.director}</p>
                 <p><strong>Year of Release: </strong>{movie.year}</p>
@@ -30,7 +32,7 @@ const MovieDetails = ({ movie }) => {
                 <p><strong>Genre: </strong>{movie.genre}</p>
                 <p><strong>Duration: </strong>{movie.duration} minutes</p>
                 <p><strong>My Review: </strong>{movie.review}</p>
-                <p>{formatDistanceToNow(new Date(movie.createdAt), {addSuffix: true})}</p>
+                <p><strong>Created: </strong>{formatDistanceToNow(new Date(movie.createdAt), {addSuffix: true})}</p>
             </div>
             <div>
                 <span className="material-symbols-outlined" onClick={handleClick}>Delete</span>
