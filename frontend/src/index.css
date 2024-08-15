@@ -54,12 +54,12 @@ header a{
 
 .movie-details div {
   margin-left: 10%;
-  width: 70%;
+  align-content: center;
 }
 
 .movie-details h3 {
   margin: 0 0 10px 0;
-  font-size: 1.2em;
+  font-size: xx-large;
   color: var(--color-primary);
 }
 .movie-details p {
@@ -114,4 +114,16 @@ div.error {
 
 input.error {
   border: 1px solid var(--error);
+}
+
+.genres-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 35px;
+  margin: 20px 0;
+}
+
+.genre-checkbox{
+  display: flex;
+  align-items: center;
 }

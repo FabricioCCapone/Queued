@@ -3,30 +3,6 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-// Define the allowed genres
-const allowedGenres = [
-    'Action',
-    'Comedy',
-    'Drama',
-    'Fantasy',
-    'Horror',
-    'Mystery',
-    'Romance',
-    'Thriller',
-    'Western',
-    'Science Fiction',
-    'Animation',
-    'Adventure',
-    'Crime',
-    'Documentary',
-    'Family',
-    'History',
-    'Music',
-    'War',
-    'TV Movie',
-    'Foreign',
-    'Other'
-];
 
 // Movie schema with id, title, director, and year fields
 const movieSchema = new Schema({
@@ -44,7 +20,6 @@ const movieSchema = new Schema({
     },
     genres: {
         type: [String],
-        enum: allowedGenres,
         required: true,
     },
     duration: {

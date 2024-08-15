@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useMoviesContext } from "../hooks/useMoviesContext";
+import Checkbox from "./Checkbox";
 
 const MovieForm = () => {
     const { dispatch } = useMoviesContext();
@@ -92,14 +93,7 @@ const MovieForm = () => {
                 />
             </label>
             <label>Genres:
-                <input
-                    type="text"
-                    name="genres"
-                    placeholder="Genres"
-                    value={genres}
-                    onChange={(e) => setGenres(e.target.value)}
-                    className={emptyFields.includes('genres') ? 'error' : ''}
-                />
+                <Checkbox/>
             </label>
             <label>Duration:
                 <input
