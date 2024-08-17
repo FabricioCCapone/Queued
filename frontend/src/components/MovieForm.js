@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { useMoviesContext } from "../hooks/useMoviesContext";
-import Checkbox from "./Checkbox";
 
 const MovieForm = () => {
     const { dispatch } = useMoviesContext();
     const [title, setTitle] = useState('');
     const [director, setDirector] = useState('');
     const [year, setYear] = useState('');
-    const [genres, setGenres] = useState('');
+    const [selectedGenres, setSelectedGenres] = useState([]);
     const [duration, setDuration] = useState('');
     const [review, setReview] = useState('');
     const [rating, setRating] = useState('');
@@ -15,13 +14,46 @@ const MovieForm = () => {
     const [emptyFields, setEmptyFields] = useState([]);
     const [error, setError] = useState(null);
 
+    const genres = [
+        'Action',
+        'Comedy',
+        'Drama',
+        'Fantasy',
+        'Horror',
+        'Mystery',
+        'Romance',
+        'Thriller',
+        'Western',
+        'Science Fiction',
+        'Animation',
+        'Adventure',
+        'Crime',
+        'Documentary',
+        'Family',
+        'History',
+        'Music',
+        'War',
+        'TV Movie',
+        'Foreign',
+        'Other'
+    ];
+
+    const handleCheckboxChange = (event) => {
+        const { value, checked } = event.target;
+        if (checked) {
+            setSelectedGenres([...selectedGenres, value]);
+        } else {
+            setSelectedGenres(selectedGenres.filter((genre) => genre !== value));
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const movie = {
             title,
             director,
             year,
-            genres: genres.split(','),
+            genres: selectedGenres,
             duration,
             review,
             rating,
@@ -49,7 +81,7 @@ const MovieForm = () => {
             setTitle('');
             setDirector('');
             setYear('');
-            setGenres('');
+            setSelectedGenres([]);
             setDuration('');
             setReview('');
             setRating('');
@@ -93,7 +125,29 @@ const MovieForm = () => {
                 />
             </label>
             <label>Genres:
-                <Checkbox/>
+                <div>
+                    <div className='genres-checkboxes'>
+                        {genres.map((genre) => (
+                            <div key={genre}>
+                                <input
+                                    className='genre-checkbox'
+                                    type="checkbox"
+                                    name="genres"
+                                    value={genre}
+                                    onChange={handleCheckboxChange}
+                                />
+                                <label>{genre}</label>
+                            </div>
+                        ))}
+                    </div>
+                    <label>Selected Genres:</label>
+                    <input
+                        type="text"
+                        value={selectedGenres.join(', ')}
+                        readOnly
+                        className={emptyFields.includes('genres') ? 'error' : ''}
+                    />
+                </div>
             </label>
             <label>Duration:
                 <input

@@ -29,15 +29,16 @@ const MovieDetails = ({ movie }) => {
                 <p>⭐{movie.rating}/10</p>
             </div>
             <div>
-                <p><strong>Genre: </strong>{movie.genre}</p>
+                {movie.genres && (
+                    <p><strong>Genres: </strong>{movie.genres.join(', ')}</p>
+                )}
                 <p><strong>Duration: </strong>{movie.duration} minutes</p>
                 <p><strong>My Review: </strong>{movie.review}</p>
                 <p><strong>Created: </strong>{formatDistanceToNow(new Date(movie.createdAt), {addSuffix: true})}</p>
             </div>
-            <div>
+            <div className="delete-div">
                 <span className="material-symbols-outlined" onClick={handleClick}>Delete</span>
             </div>
-
         </div>
     );
 }

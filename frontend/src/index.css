@@ -52,15 +52,20 @@ header a{
   display: flex;
 }
 
+.movie-details .delete-div {
+  width: 5%;
+}
+
 .movie-details div {
-  margin-left: 10%;
+  width: 100%;
   align-content: center;
+  margin-left: 5%;
 }
 
 .movie-details h3 {
-  margin: 0 0 10px 0;
-  font-size: xx-large;
+  font-size: x-large;
   color: var(--color-primary);
+  text-align: center;
 }
 .movie-details p {
   margin: 5%;
@@ -126,4 +131,8 @@ input.error {
 .genre-checkbox{
   display: flex;
   align-items: center;
+}
+
+.material-symbols-outlined {
+  margin: 10px;
 }
