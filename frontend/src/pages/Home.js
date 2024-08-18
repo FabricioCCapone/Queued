@@ -1,4 +1,4 @@
-import { useEffect} from 'react';
+import { useEffect, useState } from 'react';
 import { useMoviesContext } from '../hooks/useMoviesContext';
 
 //Components
@@ -7,6 +7,8 @@ import MovieForm from '../components/MovieForm';
 
 const Home = () => {
     const { movies, dispatch } = useMoviesContext();
+    const [showForm, setShowForm] = useState(false);
+
     useEffect(() => {
         const fetchMovies = async () => {
             const response = await fetch('/api/movies');
@@ -18,17 +20,25 @@ const Home = () => {
         fetchMovies();
     }, [dispatch]);
 
+    const toggleFormVisibility = () => {
+        setShowForm(!showForm);
+    };
+
     return (
         <div className="home">
             <h2>List of Movies Watched</h2>
             <div className="movies">
                 {movies && movies.map((movie, index) => (
                     <div className="movie" key={movie.id || index}>
-                        <MovieDetails key={movie._id}  movie={movie} />
+                        <MovieDetails key={movie._id} movie={movie} />
                     </div>
                 ))}
             </div>
-            <MovieForm/>
+            <button className='show-form-button' onClick={toggleFormVisibility}>
+                {showForm ? 'Hide Form' : 'Add New Movie'}
+            </button>
+            {showForm && <MovieForm />}
+            
         </div>
     );
 }

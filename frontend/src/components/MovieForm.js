@@ -59,8 +59,7 @@ const MovieForm = () => {
             rating,
             posterUrl
         };
-        // Log the movie object to inspect the payload
-        console.log('Movie payload:', movie);
+
         const response = await fetch('/api/addMovie', {
             method: 'POST',
             headers: {
@@ -129,14 +128,15 @@ const MovieForm = () => {
                     <div className='genres-checkboxes'>
                         {genres.map((genre) => (
                             <div key={genre}>
-                                <input
-                                    className='genre-checkbox'
-                                    type="checkbox"
-                                    name="genres"
-                                    value={genre}
-                                    onChange={handleCheckboxChange}
-                                />
-                                <label>{genre}</label>
+                                <label>
+                                    <input
+                                        className='genre-checkbox'
+                                        type="checkbox"
+                                        name="genres"
+                                        value={genre}
+                                        onChange={handleCheckboxChange}
+                                    />
+                                    {genre}</label>
                             </div>
                         ))}
                     </div>
