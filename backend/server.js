@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config();
-const routes = require('./routes/movie');
+const movieRoutes = require('./routes/movie');
+const userRoutes = require('./routes/user');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -27,7 +28,8 @@ app.use((req, res, next) => {
 
 // Routes
 
-app.use(routes);
+app.use(movieRoutes);
+app.use("/api/user", userRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}.`);
