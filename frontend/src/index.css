@@ -56,6 +56,28 @@ header a{
   margin: 0 auto;
 }
 
+/* navbar */
+nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  margin-right: 2%;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  padding: 10px 20px;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border-radius: 4px;
+  margin-left: 10px;
+  width: 5%;
+  text-align: center;
+  font-size: larger;
+}
+
 /* homepage */
 .home {
   grid-template-columns: 3fr 1fr;

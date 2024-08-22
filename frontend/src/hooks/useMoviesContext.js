@@ -1,4 +1,4 @@
-import { MoviesContext } from "../Context/MovieContext";
+import { MoviesContext } from "../context/MovieContext";
 import { useContext } from "react";
 
 export const useMoviesContext = () => {
