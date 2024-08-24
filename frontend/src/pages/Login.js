@@ -1,35 +1,15 @@
 import { useState } from 'react';
+import { useLogin } from '../hooks/useLogin';
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
+    const { login, error, isLoading } = useLogin();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const res = await fetch('http://localhost:4000/api/user/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    username,
-                    password
-                })
-            });
-            const data = await res.json();
-            if (data.error) {
-                setError(data.error);
-                setSuccess('');
-            } else {
-                setError('');
-                setSuccess(data.message);
-            }
-        } catch (err) {
-            console.error(err);
-        }
+
+        await login(username, password);
     }
 
     return (
@@ -48,10 +28,9 @@ const Login = () => {
                     placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)} />
-                <button type="submit">Login</button>
+                <button disabled={isLoading} type="submit">Login</button>
             </form>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            {success && <p style={{ color: 'green' }}>{success}</p>}
+            {error && <div className='error'>{error}</div>}
         </div>
     )
 }

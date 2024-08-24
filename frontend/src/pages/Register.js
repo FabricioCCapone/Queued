@@ -1,36 +1,18 @@
 import { useState } from 'react';
+import {useRegister} from '../hooks/useRegister';
 
 const Register = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-    const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+    const { register, error, isLoading } = useRegister();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const res = await fetch('http://localhost:4000/api/user/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    username,
-                    password,
-                    email
-                })
-            });
-            const data = await res.json();
-            if (data.error) {
-                setError(data.error);
-                setSuccess('');
-            } else {
-                setError('');
-                setSuccess(data.message);
-            }
-        } catch (err) {
-            console.error(err);
+        await register(username, password, email);
+        if (!error) {
+            setSuccess('User registered successfully');
         }
     }
 
@@ -56,9 +38,9 @@ const Register = () => {
                     placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)} />
-                <button type="submit">Register</button>
+                <button disabled={isLoading} type="submit">Register</button>
             </form>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {error && <div className='error'>{error}</div>}
             {success && <p style={{ color: 'green' }}>{success}</p>}
         </div>
     )

@@ -1,6 +1,14 @@
 import { Link } from 'react-router-dom';
+import { useLogout } from '../hooks/useLogout';
 
 const Navbar = () => {
+
+    const { logout } = useLogout();
+
+    const handleClick = () => {
+        logout();
+    }
+
     return (
         <header>
             <div className="navbar-container">
@@ -9,8 +17,11 @@ const Navbar = () => {
                     <h1>Queued</h1>
                 </Link>
                 <nav>
-                    <Link to="/user/login">Login</Link>
-                    <Link to="/user/register">Register</Link>
+                    <div>
+                        <button onClick={handleClick}>Log out</button>
+                    </div>
+                    <Link to="/api/user/login">Login</Link>
+                    <Link to="/api/user/register">Register</Link>
                 </nav>
             </div>
         </header>

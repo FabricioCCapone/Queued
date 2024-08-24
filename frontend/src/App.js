@@ -13,13 +13,13 @@ function App() {
         <Navbar />
         <div className='pages'>
           <Routes>
-            <Route path='/' element={<Home />} />
+            <Route path='' element={<Home />} />
           </Routes>
           <Routes>
-            <Route path='/user/login' element={<Login />} />
+            <Route path='/api/user/login' element={<Login />} />
           </Routes>
           <Routes>
-            <Route path='/user/register' element={<Register />} />
+            <Route path='/api/user/register' element={<Register />} />
           </Routes>
         </div>
       </BrowserRouter>
