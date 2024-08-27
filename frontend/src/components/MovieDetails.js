@@ -1,15 +1,26 @@
 import { useMoviesContext } from "../hooks/useMoviesContext";
+import {useAuthContext} from "../hooks/useAuthContext";
 
 //Date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 const MovieDetails = ({ movie }) => {
 
+    const { user } = useAuthContext();
+
     const { dispatch } = useMoviesContext();
 
     const handleClick = async () => {
+        if(!user){
+            alert('You must be logged in to delete a movie');
+            return;
+        }
         const response = await fetch(`/api/` + movie._id, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${user.token}`
+            }
         });
         // const data = await response.json();
         if (response.ok) {

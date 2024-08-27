@@ -39,7 +39,11 @@ const movieSchema = new Schema({
     posterUrl: {
         type: String,
         required: true // or false if it's optional
-      }
+      },
+    user_id: {
+        type: String,
+        required: true
+    }
 },
     {
         timestamps: true

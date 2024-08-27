@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useMoviesContext } from "../hooks/useMoviesContext";
+import {useAuthContext} from "../hooks/useAuthContext";
 
 const MovieForm = () => {
     const { dispatch } = useMoviesContext();
@@ -13,6 +14,8 @@ const MovieForm = () => {
     const [posterUrl, setUrl] = useState('');
     const [emptyFields, setEmptyFields] = useState([]);
     const [error, setError] = useState(null);
+
+    const { user } = useAuthContext();
 
     const genres = [
         'Action',
@@ -49,6 +52,11 @@ const MovieForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if(!user){
+            setError('You must be logged in to add a movie');
+            return;
+        }
+
         const movie = {
             title,
             director,
@@ -63,7 +71,8 @@ const MovieForm = () => {
         const response = await fetch('/api/addMovie', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${user.token}`
             },
             body: JSON.stringify(movie)
         });

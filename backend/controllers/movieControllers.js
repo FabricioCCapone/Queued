@@ -9,7 +9,8 @@ const mongoose = require('mongoose');
 // @access  Public
 const getMovies = async (req, res) => {
     try {
-        const movies = await Movie.find();
+        const user_id = req.user._id;
+        const movies = await Movie.find({ user_id }).sort({ createdAt: -1 });
         res.json(movies);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -57,9 +58,9 @@ const createMovie = async (req, res) => {
         return res.status(400).json({error : 'Missing fields:',  emptyFields});
     }
 
-    const movie = new Movie({ title, director, year, genres, duration, review, rating, posterUrl });
-
     try {
+        const user_id = req.user._id;
+        const movie = new Movie({ title, director, year, genres, duration, review, rating, posterUrl, user_id });
         const newMovie = await movie.save();
         res.status(201).json(newMovie);
     } catch (error) {

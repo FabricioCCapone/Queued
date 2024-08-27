@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useMoviesContext } from '../hooks/useMoviesContext';
+import {useAuthContext} from '../hooks/useAuthContext';
 
 //Components
 import MovieDetails from '../components/MovieDetails';
@@ -8,17 +9,24 @@ import MovieForm from '../components/MovieForm';
 const Home = () => {
     const { movies, dispatch } = useMoviesContext();
     const [showForm, setShowForm] = useState(false);
+    const { user } = useAuthContext();
 
     useEffect(() => {
         const fetchMovies = async () => {
-            const response = await fetch('/api/movies');
+            const response = await fetch('/api/movies', {
+                headers: {
+                    Authorization: `Bearer ${user.token}`
+                }
+            });
             const data = await response.json();
             if (response.ok) {
                 dispatch({ type: 'GET_MOVIES', payload: data });
             }
         }
-        fetchMovies();
-    }, [dispatch]);
+        if (user){
+            fetchMovies();
+        }
+    }, [dispatch, user]);
 
     const toggleFormVisibility = () => {
         setShowForm(!showForm);
