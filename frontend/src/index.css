@@ -48,6 +48,11 @@ header a{
   align-self: center;
 }
 
+.navbar-user{
+  display: flex;
+  align-items: center;
+}
+
 /* body */
 
 .pages {
@@ -165,6 +170,14 @@ header nav button {
 
 .movie-details img {
   border-radius: 4px;
+}
+
+/* Media query for mobile screens */
+@media (max-width: 600px) {
+  .movie-details {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 /* form */
